@@ -8,6 +8,7 @@ from langgraph.graph import StateGraph, END
 from repo_clone import download_repo1,del_repo
 
 
+# State Schema
 class AgentState(TypedDict):
 	folder_path: str
 	files: List[Dict[str, str]]
@@ -15,7 +16,7 @@ class AgentState(TypedDict):
 	content: Dict[str, Any]
 
 
-
+# Node 1: File Loader
 def file_loader(state: AgentState) -> AgentState:
 	folder_path = state.get("folder_path")
 	base = Path(folder_path)
@@ -40,7 +41,7 @@ def file_loader(state: AgentState) -> AgentState:
 	return {**state, "files": files_data}
 
 
-
+# Node 2: Analyzer Agent
 def analyzer_agent(state: AgentState) -> AgentState:
 	files = state.get("files", [])
 	print(f"\n[Analyzer] Analyzing {len(files)} files...")
@@ -81,7 +82,7 @@ Respond in JSON:
 	return {**state, "analysis": data}
 
 
-
+# Node 3: Content Generator
 def content_agent(state: AgentState) -> AgentState:
 	analysis = state.get("analysis")
 	folder_path = state.get("folder_path")
@@ -114,13 +115,13 @@ Respond strictly in JSON:
 	return {**state, "content": data}
 
 
-
+# Node 4: Printer
 def supervisor_printer(state: AgentState) -> AgentState:
 	print("\n[Workflow Completed]")
 	return state
 
 
-
+# Build Workflow
 workflow = StateGraph(AgentState)
 workflow.add_node("loader", file_loader)
 workflow.add_node("analyzer", analyzer_agent)
@@ -133,7 +134,7 @@ workflow.add_edge("printer", END)
 workflow.set_entry_point("loader")
 app = workflow.compile()
 
-
+# Full Workflow function
 def full_work(code_path: str):
 	temp_path = None
 	try:
