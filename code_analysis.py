@@ -134,3 +134,23 @@ workflow.set_entry_point("loader")
 app = workflow.compile()
 
 
+def full_work(code_path: str):
+	temp_path = None
+	try:
+		if code_path.startswith("http"):
+			temp_path = download_repo1(code_path)
+			path_to_use = temp_path
+		else:
+			path_to_use = code_path
+		input_s: AgentState = {
+			"folder_path": path_to_use,
+			"files": [],
+			"analysis": {},
+			"content": {}
+			} 
+		var = app.invoke(input_s)
+		analysis_content = json.dumps(var.get("content", {}), indent=2)
+		return analysis_content
+	finally:
+		if temp_path:
+			del_repo(temp_path)
