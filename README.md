@@ -1,47 +1,55 @@
-# Project Title
-LLM Post Generator for Notion
+# LinkedIn Post Generator and Saver
 
 ## Project Description
-This project utilizes Large Language Models (LLMs) to generate LinkedIn-style posts based on either a user-provided query or an analysis of a given code repository. The generated posts can then be saved to a Notion database.
+The LinkedIn Post Generator is a Python-based project that utilizes Large Language Models (LLMs) to generate engaging and insightful LinkedIn posts. The project consists of multiple modules, including code analysis, post generation, and Notion integration.
 
 ## Installation Steps
-To install and run this project, follow these steps:
+To install the project, follow these steps:
 1. Clone the repository using `git clone`.
-2. Install the required packages by running `pip install -r requirements.txt`.
-3. Set up your environment variables for Notion API keys and LLM models by creating a `.env` file with the following format:
-   ```
-   NOTION_API_KEY=YOUR_NOTION_API_KEY
-   NOTION_DB_ID=YOUR_NOTION_DB_ID
-   GEMINI_API_KEY=YOUR_GEMINI_API_KEY
-   GROQ_API_KEY=YOUR_GROQ_API_KEY
-   ```
-4. Run the application using `streamlit run main.py`.
+2. Install the required dependencies by running `pip install -r requirements.txt`.
+3. Set up your environment variables by creating a `.env` file with the following keys:
+	* `NOTION_API_KEY`
+	* `NOTION_DB_ID`
+	* `GOOGLE_API_KEY`
+	* `GROQ_API_KEY`
+4. Load the environment variables using `load_dotenv()`.
 
 ## Usage Examples
 The project provides two main functionalities:
-* **Query-Based Post Generation**: Users can input a topic or query, and the LLM will generate a post based on this input.
-* **Code-Based Post Generation**: Users can provide a code repository path, and the LLM will analyze the code and generate a post summarizing the project.
+### Code-Based Post Generation
+1. Enter the path of the code repository you want to analyze.
+2. Click the "Click to Analyze for a Post" button to generate a LinkedIn post based on the code analysis.
+3. The generated post will be displayed, and you can save it to your Notion database by clicking the "Save to Notion" button.
 
-To use these functionalities, navigate to the application's web interface and follow the prompts.
+### Query-Based Post Generation
+1. Enter a topic or query you want to generate a post about.
+2. Click the "Generate Content" button to generate a LinkedIn post based on the query.
+3. The generated post will be displayed, and you can save it to your Notion database by clicking the "Save to Notion" button.
 
 ## Features
-* Generates LinkedIn-style posts based on user input or code analysis
-* Saves generated posts to a Notion database
-* Utilizes Large Language Models for post generation
-* Provides a user-friendly web interface for input and post generation
+* Code analysis using LLMs to generate insightful posts
+* Query-based post generation for topics or queries
+* Notion integration to save generated posts to your database
+* Streamlit-based interface for easy usage
 
 ## Folder Structure
-The project is organized into the following folders and files:
-* `repo_clone.py`: Handles cloning of repositories for code analysis
-* `post_generator.py`: Generates posts based on user input or code analysis
-* `code_analysis.py`: Analyzes code repositories and provides summaries for post generation
-* `credential.py`: Stores environment variables and initializes LLM models
-* `save_to_notion.py`: Handles saving generated posts to a Notion database
-* `main.py`: The main application file, providing a web interface for user input and post generation
+The project consists of the following folders and files:
+* `repo_clone.py`: Module for cloning repositories and deleting temporary files.
+* `post_generator.py`: Module for generating LinkedIn posts based on code analysis or queries.
+* `code_analysis.py`: Module for analyzing code and generating summaries.
+* `credential.py`: Module for loading environment variables and initializing LLMs.
+* `save_to_notion.py`: Module for saving generated posts to Notion database.
+* `main.py`: Main module for running the Streamlit application.
 
 ## Contribution
-Contributions to this project are welcome. To contribute, please fork the repository, make your changes, and submit a pull request. Ensure that your changes are properly documented and follow the project's coding standards.
+Contributions to the project are welcome. To contribute, please fork the repository, make your changes, and submit a pull request.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+## Acknowledgments
+The project utilizes the following libraries and frameworks:
+* `langchain` for LLM integration
+* `streamlit` for building the user interface
+* `notion` for integrating with the Notion API and Database
+* `langchain-google-genai` for integrating with the Google API
+* `groq` for integrating with the Groq API
 
+Note: The `requirements.txt` file should be created and include all the necessary dependencies for the project.
